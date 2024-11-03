@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.example.betterthanyesterday.TodoFragment"
-        android:label="fragment_todo"
+        android:label="Todo"
         tools:layout="@layout/fragment_todo" />
     <fragment
         android:id="@+id/budgetFragment"
         android:name="com.example.betterthanyesterday.BudgetFragment"
-        android:label="fragment_budget2"
+        android:label="Budget"
         tools:layout="@layout/fragment_budget" />
     <fragment
         android:id="@+id/healthFragment"
         android:name="com.example.betterthanyesterday.HealthFragment"
-        android:label="fragment_health"
+        android:label="Health"
         tools:layout="@layout/fragment_health" />
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.betterthanyesterday.RecipeFragment"
-        android:label="fragment_recipe"
+        android:label="Recipe"
         tools:layout="@layout/fragment_recipe" />
 </navigation>

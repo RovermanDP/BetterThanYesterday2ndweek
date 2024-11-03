@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.todoFragment, R.id.budgetFragment, R.id.healthFragment, R.id.recipeFragment)
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
         setContentView(binding.root)
     }
