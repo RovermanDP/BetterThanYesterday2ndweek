@@ -9,7 +9,11 @@
         android:id="@+id/todoFragment"
         android:name="com.example.betterthanyesterday.TodoFragment"
         android:label="Todo"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_todo" >
+        <action
+            android:id="@+id/action_todoFragment_to_todoAddFragment"
+            app:destination="@id/todoAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/budgetFragment"
         android:name="com.example.betterthanyesterday.BudgetFragment"
@@ -25,4 +29,13 @@
         android:name="com.example.betterthanyesterday.RecipeFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe" />
+    <fragment
+        android:id="@+id/todoAddFragment"
+        android:name="com.example.betterthanyesterday.TodoAddFragment"
+        android:label="Todo"
+        tools:layout="@layout/fragment_todo_add" >
+        <action
+            android:id="@+id/action_todoAddFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
 </navigation>
