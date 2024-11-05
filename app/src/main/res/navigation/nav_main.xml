@@ -18,7 +18,11 @@
         android:id="@+id/budgetFragment"
         android:name="com.example.betterthanyesterday.BudgetFragment"
         android:label="Budget"
-        tools:layout="@layout/fragment_budget" />
+        tools:layout="@layout/fragment_budget" >
+        <action
+            android:id="@+id/action_budgetFragment_to_budgetAddFragment"
+            app:destination="@id/budgetAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/healthFragment"
         android:name="com.example.betterthanyesterday.HealthFragment"
@@ -37,5 +41,12 @@
         <action
             android:id="@+id/action_todoAddFragment_to_todoFragment"
             app:destination="@id/todoFragment" />
+
+
     </fragment>
+    <fragment
+        android:id="@+id/budgetAddFragment"
+        android:name="com.example.betterthanyesterday.BudgetAddFragment"
+        android:label="fragment_budget_add"
+        tools:layout="@layout/fragment_budget_add" />
 </navigation>
