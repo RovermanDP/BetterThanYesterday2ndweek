@@ -33,6 +33,17 @@
         android:name="com.example.betterthanyesterday.RecipeFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe" />
+        <action
+            android:id="@+id/action_recipeFragment_to_RecipeAddFragment"
+            app:destination="@id/RecipeAddFragment" />
+    <fragment
+        android:id="@+id/RecipeAddFragment"
+        android:name="com.example.betterthanyesterday.RecipeAddFragment"
+        android:label="Recipe"
+        tools:layout="@layout/fragment_recipe_add" />
+        <action
+            android:id="@+id/action_RecipeAddFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     <fragment
         android:id="@+id/todoAddFragment"
         android:name="com.example.betterthanyesterday.TodoAddFragment"
