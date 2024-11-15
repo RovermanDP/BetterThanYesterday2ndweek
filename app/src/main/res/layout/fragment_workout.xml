@@ -17,5 +17,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!-- 운동 기록 입력 UI를 위한 추가 뷰들 -->
+    <!-- 운동 기록 입력 UI -->
+    <EditText
+        android:id="@+id/editWorkoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Workout Name" />
+
+    <EditText
+        android:id="@+id/editDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Duration (minutes)" />
+
+    <EditText
+        android:id="@+id/editCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Calories Burned" />
+
+    <Button
+        android:id="@+id/btnAddWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Workout" />
 </LinearLayout>

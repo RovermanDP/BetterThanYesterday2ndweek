@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857455155136",
+    "project_id": "better-than-yesterday-8828d",
+    "storage_bucket": "better-than-yesterday-8828d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857455155136:android:7911be87abcbe51d3fda25",
+        "android_client_info": {
+          "package_name": "com.example.betterthanyesterday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf-sBPlmvDawhU8fwLWIEmcSXhEZ92wzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

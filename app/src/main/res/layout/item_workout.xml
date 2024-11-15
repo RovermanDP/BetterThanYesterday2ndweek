@@ -11,12 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Workout Name"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtWorkoutDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Date"
         android:textSize="14sp" />
 
@@ -24,6 +26,7 @@
         android:id="@+id/txtDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Duration"
         android:textSize="14sp" />
 

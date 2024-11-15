@@ -4,17 +4,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.betterthanyesterday.databinding.ItemWorkoutBinding
+import com.google.firebase.Timestamp
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-data class Workout(val name: String, val date: String, val duration: Int, val calories: Int)
+data class ExerciseRecord(
+    val name: String = "",
+    val date: Timestamp = Timestamp.now(),
+    val duration: Int = 0,
+    val calories: Int = 0
+)
 
-class WorkoutAdapter(private val workoutList: List<Workout>) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
+class WorkoutAdapter(private var recordList: List<ExerciseRecord>) :
+    RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
 
-    inner class WorkoutViewHolder(val binding: ItemWorkoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(workout: Workout) {
-            binding.txtWorkoutName.text = workout.name
-            binding.txtWorkoutDate.text = workout.date
-            binding.txtDuration.text = "${workout.duration} Mins"
-            binding.txtCalories.text = "${workout.calories} Kcal"
+    inner class WorkoutViewHolder(val binding: ItemWorkoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(record: ExerciseRecord) {
+            binding.txtWorkoutName.text = record.name
+            binding.txtWorkoutDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(record.date.toDate())
+            binding.txtDuration.text = "${record.duration} Mins"
+            binding.txtCalories.text = "${record.calories} Kcal"
         }
     }
 
@@ -24,8 +34,13 @@ class WorkoutAdapter(private val workoutList: List<Workout>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: WorkoutViewHolder, position: Int) {
-        holder.bind(workoutList[position])
+        holder.bind(recordList[position])
     }
 
-    override fun getItemCount() = workoutList.size
+    override fun getItemCount() = recordList.size
+
+    fun updateRecords(newRecords: List<ExerciseRecord>) {
+        recordList = newRecords
+        notifyDataSetChanged()
+    }
 }
