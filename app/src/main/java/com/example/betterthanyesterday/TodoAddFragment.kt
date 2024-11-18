@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.betterthanyesterday.databinding.FragmentTodoAddBinding
+import com.example.betterthanyesterday.viewmodel.Todo
+import com.example.betterthanyesterday.viewmodel.TodoViewModel
 
 class TodoAddFragment : Fragment() {
+
+    val viewModel: TodoViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,9 @@ class TodoAddFragment : Fragment() {
             val newDetail = binding.edtDetail.text.toString()
 
             if (newTitle.isNotBlank()) {
-                val bundle = Bundle().apply {
-                    putString("newTitle", newTitle)
-                    putString("newDetail", newDetail)
-                }
+                viewModel.addTodo(Todo(newTitle, newDetail))
 
-                findNavController().navigate(R.id.action_todoAddFragment_to_todoFragment, bundle)
+                findNavController().navigate(R.id.action_todoAddFragment_to_todoFragment)
             }
         }
 

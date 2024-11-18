@@ -5,11 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.betterthanyesterday.databinding.FragmentTodoBinding
+import com.example.betterthanyesterday.viewmodel.Todo
+import com.example.betterthanyesterday.viewmodel.TodoViewModel
 
 class TodoFragment : Fragment() {
+
+    val viewModel: TodoViewModel by activityViewModels()
 
     var binding: FragmentTodoBinding? = null
     val todos = arrayOf(
@@ -32,18 +37,12 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = TodoAdapter(emptyArray())
+        binding?.recTodos?.adapter = adapter
         binding?.recTodos?.layoutManager = LinearLayoutManager(requireContext())
-        binding?.recTodos?.adapter = TodoAdapter(todos)
 
-        val todoList = todos.toMutableList()
-
-        arguments?.let {
-            val newTitle = it.getString("newTitle")
-            val newDetail = it.getString("newDetail")
-            if (!newTitle.isNullOrEmpty()) {
-                todoList.add(Todo(newTitle))
-                binding?.recTodos?.adapter = TodoAdapter(todoList.toTypedArray())
-            }
+        viewModel.todoList.observe(viewLifecycleOwner) { todos ->
+            adapter.updateData(todos.toTypedArray())
         }
 
         binding?.btnAdd?.setOnClickListener {

@@ -4,9 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.betterthanyesterday.databinding.ListTodosBinding
+import com.example.betterthanyesterday.viewmodel.Todo
 
-class TodoAdapter(val todos: Array<Todo>)
+class TodoAdapter(var todos: Array<Todo>)
     : RecyclerView.Adapter<TodoAdapter.Holder>() {
+
+    fun updateData(newTodos: Array<Todo> ) {
+        todos = newTodos
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ListTodosBinding.inflate(LayoutInflater.from(parent.context))
