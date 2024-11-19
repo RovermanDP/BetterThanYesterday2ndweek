@@ -31,16 +31,18 @@ class BudgetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.nextBtn?.setOnClickListener{
-            findNavController().navigate(R.id.budgetAddFragment)
-        }
-
-
-
         binding?.calendar?.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val chooseYear = year
             val chooseMonth = month + 1
             val chooseDay = dayOfMonth
+
+            val bundle = Bundle().apply {
+                putInt("chooseYear", chooseYear)
+                putInt("chooseMonth", chooseMonth)
+                putInt("chooseDay", chooseDay)
+            }
+
+            findNavController().navigate(R.id.budgetAddFragment, bundle)
         }
     }
 }

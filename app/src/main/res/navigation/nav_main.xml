@@ -58,6 +58,6 @@
     <fragment
         android:id="@+id/budgetAddFragment"
         android:name="com.example.betterthanyesterday.BudgetAddFragment"
-        android:label="fragment_budget_add"
+        android:label="Budget"
         tools:layout="@layout/fragment_budget_add" />
 </navigation>
