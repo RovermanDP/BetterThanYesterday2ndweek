@@ -11,7 +11,7 @@
         android:icon="@drawable/budget"
         android:title="Budget" />
     <item
-        android:id="@+id/healthFragment"
+        android:id="@+id/exerciseDateFragment"
         android:icon="@drawable/health"
         android:title="Health" />
     <item

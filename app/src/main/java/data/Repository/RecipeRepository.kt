@@ -2,7 +2,6 @@ package com.example.betterthanyesterday.Repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.betterthanyesterday.ExerciseRecord
 import com.example.betterthanyesterday.viewmodel.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot

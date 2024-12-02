@@ -1,10 +1,10 @@
 package com.example.betterthanyesterday.repository
 
-import com.example.betterthanyesterday.ExerciseRecord
 import com.google.firebase.firestore.FirebaseFirestore
+import data.Model.ExerciseRecord
 import kotlinx.coroutines.tasks.await
 
-class WorkoutRepository {
+class ExerciseRepository {
 
     private val firestore = FirebaseFirestore.getInstance()
 

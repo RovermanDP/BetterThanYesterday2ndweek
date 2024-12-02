@@ -24,10 +24,24 @@
             app:destination="@id/budgetAddFragment" />
     </fragment>
     <fragment
-        android:id="@+id/healthFragment"
-        android:name="com.example.betterthanyesterday.HealthFragment"
+        android:id="@+id/exerciseDateFragment"
+        android:name="com.example.betterthanyesterday.ExerciseDateFragment"
         android:label="Health"
-        tools:layout="@layout/fragment_health" />
+        tools:layout="@layout/fragment_exercise_date">
+        <action
+            android:id="@+id/action_exerciseDateFragment_to_exerciseDetailsFragment"
+            app:destination="@id/exerciseDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseDetailsFragment"
+        android:name="com.example.betterthanyesterday.ExerciseDetailsFragment"
+        android:label="Exercise Details"
+        tools:layout="@layout/fragment_exercise_details" >
+        <action
+            android:id="@+id/action_exerciseDetailsFragment_self"
+            app:destination="@id/exerciseDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.betterthanyesterday.RecipeFragment"

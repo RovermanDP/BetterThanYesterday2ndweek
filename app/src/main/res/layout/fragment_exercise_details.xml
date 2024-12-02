@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 선택한 날짜 표시 -->
+    <TextView
+        android:id="@+id/dateTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="날짜: 없음"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 운동 종류 입력 -->
+    <EditText
+        android:id="@+id/exerciseTypeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="운동 종류를 입력하세요"
+        android:inputType="text"
+        android:layout_marginBottom="12dp" />
+
+    <!-- 소모 칼로리 입력 -->
+    <EditText
+        android:id="@+id/caloriesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="소모 칼로리를 입력하세요"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 운동 추가 버튼 -->
+    <Button
+        android:id="@+id/addExerciseBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="운동 추가"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 총 소모 칼로리 -->
+    <TextView
+        android:id="@+id/totalCaloriesTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="총 소모 칼로리: 0"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <!-- 운동 기록 리스트 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        />
+
+</LinearLayout>
+
+

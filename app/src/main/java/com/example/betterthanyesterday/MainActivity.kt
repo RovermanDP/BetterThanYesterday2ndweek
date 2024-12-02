@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.betterthanyesterday.databinding.ActivityMainBinding
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val navController = binding.frgNav.getFragment<NavHostFragment>().navController
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.todoFragment, R.id.budgetFragment, R.id.healthFragment, R.id.recipeFragment)
+            setOf(R.id.todoFragment, R.id.budgetFragment, R.id.exerciseDateFragment, R.id.recipeFragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
