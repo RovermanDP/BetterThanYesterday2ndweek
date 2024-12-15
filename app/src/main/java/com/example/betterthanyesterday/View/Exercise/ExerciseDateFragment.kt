@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Exercise
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.betterthanyesterday.R
 import com.example.betterthanyesterday.databinding.FragmentExerciseDateBinding
 
 class ExerciseDateFragment : Fragment() {

@@ -1,7 +1,6 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Recipe
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.betterthanyesterday.R
 import com.example.betterthanyesterday.databinding.FragmentRecipeAddBinding
-import com.example.betterthanyesterday.viewmodel.Recipe
-import com.example.betterthanyesterday.viewmodel.RecipeViewModel
+import com.example.betterthanyesterday.Viewmodel.Recipe
+import com.example.betterthanyesterday.Viewmodel.RecipeViewModel
 
 class RecipeAddFragment : Fragment() {
 

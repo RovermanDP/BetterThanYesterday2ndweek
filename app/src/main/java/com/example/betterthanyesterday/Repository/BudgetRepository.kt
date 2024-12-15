@@ -1,9 +1,7 @@
 package com.example.betterthanyesterday.Repository
 
-import com.example.betterthanyesterday.BudgetRecord
+import com.example.betterthanyesterday.View.Budget.BudgetRecord
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class BudgetRepository {

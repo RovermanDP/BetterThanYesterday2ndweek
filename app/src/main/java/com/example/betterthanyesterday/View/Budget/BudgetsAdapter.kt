@@ -1,12 +1,9 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Budget
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.betterthanyesterday.databinding.ListBudgetsBinding
-import com.example.betterthanyesterday.databinding.ListTodosBinding
 
 data class BudgetRecord(
     val choice : String = "",

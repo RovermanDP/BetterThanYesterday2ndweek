@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Recipe
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.betterthanyesterday.viewmodel.Recipe
+import com.example.betterthanyesterday.R
+import com.example.betterthanyesterday.Viewmodel.Recipe
 
 class RecipeAdapter(
     private var recipes: MutableList<Recipe>,

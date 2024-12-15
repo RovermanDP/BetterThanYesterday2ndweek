@@ -1,7 +1,7 @@
 package com.example.betterthanyesterday.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
-import data.Model.ExerciseRecord
+import com.example.betterthanyesterday.View.Exercise.ExerciseRecord
 import kotlinx.coroutines.tasks.await
 
 class ExerciseRepository {

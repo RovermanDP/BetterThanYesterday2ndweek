@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FieldValue
-import data.Model.ExerciseRecord
+import com.example.betterthanyesterday.View.Exercise.ExerciseRecord
 
 class ExerciseViewModel : ViewModel() {
 

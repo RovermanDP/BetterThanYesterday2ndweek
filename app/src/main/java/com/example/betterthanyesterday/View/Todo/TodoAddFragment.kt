@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Todo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.betterthanyesterday.R
 import com.example.betterthanyesterday.databinding.FragmentTodoAddBinding
-import com.example.betterthanyesterday.viewmodel.Todo
-import com.example.betterthanyesterday.viewmodel.TodoViewModel
+import com.example.betterthanyesterday.Viewmodel.Todo
+import com.example.betterthanyesterday.Viewmodel.TodoViewModel
 
 class TodoAddFragment : Fragment() {
 

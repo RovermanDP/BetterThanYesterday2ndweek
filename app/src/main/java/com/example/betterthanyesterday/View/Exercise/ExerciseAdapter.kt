@@ -1,11 +1,11 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Exercise
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import data.Model.ExerciseRecord
+import com.example.betterthanyesterday.R
 
 
 class ExercisesAdapter(private var records: List<ExerciseRecord>) :

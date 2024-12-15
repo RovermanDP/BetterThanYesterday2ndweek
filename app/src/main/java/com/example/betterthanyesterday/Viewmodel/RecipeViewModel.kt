@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday.viewmodel
+package com.example.betterthanyesterday.Viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

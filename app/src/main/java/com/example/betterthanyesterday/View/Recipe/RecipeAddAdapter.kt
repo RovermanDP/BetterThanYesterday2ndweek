@@ -1,10 +1,11 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Recipe
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import com.example.betterthanyesterday.R
 
 data class Ingredient(
     val name: String,

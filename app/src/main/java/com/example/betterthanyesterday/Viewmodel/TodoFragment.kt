@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.Viewmodel
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,24 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.betterthanyesterday.R
+import com.example.betterthanyesterday.View.Todo.TodoAdapter
 import com.example.betterthanyesterday.databinding.FragmentTodoBinding
-import com.example.betterthanyesterday.viewmodel.Todo
-import com.example.betterthanyesterday.viewmodel.TodoViewModel
 
 class TodoFragment : Fragment() {
 
     val viewModel: TodoViewModel by activityViewModels()
 
     var binding: FragmentTodoBinding? = null
-    val todos = arrayOf(
-        Todo("객프 강의 듣기"),
-        Todo("BTY 만들기"),
-        Todo("자기소개서 쓰기"),
-        Todo("데이트 하기"),
-        Todo("후쿠오카 여행 계획 짜기"),
-        Todo("컴구 강의 듣기")
-    )
 
+    // 뷰를 만들 때 실행할 내용
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,13 +27,15 @@ class TodoFragment : Fragment() {
         return binding?.root
     }
 
+    // 뷰가 만들어지면 실행할 내용
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = TodoAdapter(emptyArray())
+        val adapter = TodoAdapter(emptyArray(), parentFragmentManager, viewModel)
         binding?.recTodos?.adapter = adapter
         binding?.recTodos?.layoutManager = LinearLayoutManager(requireContext())
 
+        // 뷰모델의 LiveData 구독
         viewModel.todoList.observe(viewLifecycleOwner) { todos ->
             adapter.updateData(todos.toTypedArray())
         }
@@ -51,6 +46,7 @@ class TodoFragment : Fragment() {
 
     }
 
+    // 뷰 파괴될 때 메모리 누수 방지
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

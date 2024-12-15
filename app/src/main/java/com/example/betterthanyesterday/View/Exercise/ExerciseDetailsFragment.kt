@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Exercise
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.betterthanyesterday.ExerciseViewModel
 import com.example.betterthanyesterday.databinding.FragmentExerciseDetailsBinding
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import data.Model.ExerciseRecord
 
 class ExerciseDetailsFragment : Fragment() {
 

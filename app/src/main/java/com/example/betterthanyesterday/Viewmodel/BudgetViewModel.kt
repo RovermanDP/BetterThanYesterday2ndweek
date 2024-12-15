@@ -1,10 +1,10 @@
-package com.example.betterthanyesterday.viewmodel
+package com.example.betterthanyesterday.Viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.betterthanyesterday.BudgetRecord
+import com.example.betterthanyesterday.View.Budget.BudgetRecord
 import com.example.betterthanyesterday.Repository.BudgetRepository
 import kotlinx.coroutines.launch
 

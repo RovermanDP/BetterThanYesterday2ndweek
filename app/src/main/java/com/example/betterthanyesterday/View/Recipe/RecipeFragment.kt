@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Recipe
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.betterthanyesterday.R
 import com.example.betterthanyesterday.databinding.FragmentRecipeBinding
-import com.example.betterthanyesterday.viewmodel.RecipeViewModel
+import com.example.betterthanyesterday.Viewmodel.RecipeViewModel
 
 
 class RecipeFragment : Fragment() {

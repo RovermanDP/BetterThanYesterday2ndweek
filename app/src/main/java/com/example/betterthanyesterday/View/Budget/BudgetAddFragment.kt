@@ -1,20 +1,14 @@
-package com.example.betterthanyesterday
+package com.example.betterthanyesterday.View.Budget
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.betterthanyesterday.databinding.FragmentBudgetAddBinding
-import com.example.betterthanyesterday.databinding.FragmentBudgetBinding
-import com.example.betterthanyesterday.databinding.FragmentTodoBinding
-import com.example.betterthanyesterday.viewmodel.BudgetViewModel
+import com.example.betterthanyesterday.Viewmodel.BudgetViewModel
 
 
 class BudgetAddFragment : Fragment() {

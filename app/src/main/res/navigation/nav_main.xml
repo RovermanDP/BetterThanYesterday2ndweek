@@ -7,16 +7,19 @@
 
     <fragment
         android:id="@+id/todoFragment"
-        android:name="com.example.betterthanyesterday.TodoFragment"
+        android:name="com.example.betterthanyesterday.Viewmodel.TodoFragment"
         android:label="Todo"
         tools:layout="@layout/fragment_todo" >
         <action
             android:id="@+id/action_todoFragment_to_todoAddFragment"
             app:destination="@id/todoAddFragment" />
+        <action
+            android:id="@+id/action_todoFragment_to_todoDialogFragment"
+            app:destination="@id/todoDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/budgetFragment"
-        android:name="com.example.betterthanyesterday.BudgetFragment"
+        android:name="com.example.betterthanyesterday.View.Budget.BudgetFragment"
         android:label="Budget"
         tools:layout="@layout/fragment_budget" >
         <action
@@ -25,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseDateFragment"
-        android:name="com.example.betterthanyesterday.ExerciseDateFragment"
+        android:name="com.example.betterthanyesterday.View.Exercise.ExerciseDateFragment"
         android:label="Health"
         tools:layout="@layout/fragment_exercise_date">
         <action
@@ -35,7 +38,7 @@
 
     <fragment
         android:id="@+id/exerciseDetailsFragment"
-        android:name="com.example.betterthanyesterday.ExerciseDetailsFragment"
+        android:name="com.example.betterthanyesterday.View.Exercise.ExerciseDetailsFragment"
         android:label="Exercise Details"
         tools:layout="@layout/fragment_exercise_details" >
         <action
@@ -44,23 +47,23 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.example.betterthanyesterday.RecipeFragment"
+        android:name="com.example.betterthanyesterday.View.Recipe.RecipeFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe" />
-        <action
-            android:id="@+id/action_recipeFragment_to_RecipeAddFragment"
-            app:destination="@id/RecipeAddFragment" />
+    <action
+        android:id="@+id/action_recipeFragment_to_RecipeAddFragment"
+        app:destination="@id/RecipeAddFragment" />
     <fragment
         android:id="@+id/RecipeAddFragment"
-        android:name="com.example.betterthanyesterday.RecipeAddFragment"
+        android:name="com.example.betterthanyesterday.View.Recipe.RecipeAddFragment"
         android:label="Recipe"
         tools:layout="@layout/fragment_recipe_add" />
-        <action
-            android:id="@+id/action_RecipeAddFragment_to_recipeFragment"
-            app:destination="@id/recipeFragment" />
+    <action
+        android:id="@+id/action_RecipeAddFragment_to_recipeFragment"
+        app:destination="@id/recipeFragment" />
     <fragment
         android:id="@+id/todoAddFragment"
-        android:name="com.example.betterthanyesterday.TodoAddFragment"
+        android:name="com.example.betterthanyesterday.View.Todo.TodoAddFragment"
         android:label="Todo"
         tools:layout="@layout/fragment_todo_add" >
         <action
@@ -71,7 +74,16 @@
     </fragment>
     <fragment
         android:id="@+id/budgetAddFragment"
-        android:name="com.example.betterthanyesterday.BudgetAddFragment"
+        android:name="com.example.betterthanyesterday.View.Budget.BudgetAddFragment"
         android:label="Budget"
         tools:layout="@layout/fragment_budget_add" />
+    <fragment
+        android:id="@+id/todoDialogFragment"
+        android:name="com.example.betterthanyesterday.View.Todo.TodoDialogFragment"
+        android:label="Todo"
+        tools:layout="@layout/fragment_todo_dialog">
+    <action
+        android:id="@+id/action_todoDialogFragment_to_todoFragment"
+        app:destination="@id/todoFragment" />
+    </fragment>
 </navigation>

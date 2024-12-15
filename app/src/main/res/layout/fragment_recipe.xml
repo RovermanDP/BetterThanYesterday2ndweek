@@ -5,7 +5,7 @@
     android:id="@+id/recipeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeFragment">
+    tools:context=".View.Recipe.RecipeFragment">
 
     <Button
         android:id="@+id/btn_add"
