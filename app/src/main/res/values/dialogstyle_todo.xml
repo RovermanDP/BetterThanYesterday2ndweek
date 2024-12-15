@@ -1,0 +1,16 @@
+<resources>
+    <!-- 다이얼로그 스타일 -->
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <!-- 타이틀바 표시 여부 -->
+        <item name="android:windowNoTitle">true</item> <!-- 타이틀을 없앰 -->
+
+        <!-- 다이얼로그가 화면 크기를 넘지 않도록 설정 -->
+        <item name="android:windowIsFloating">true</item> <!-- 다이얼로그를 플로팅 상태로 설정 -->
+
+        <!-- 배경을 투명하게 설정 (전체 배경을 덮는 배경 제거) -->
+        <item name="android:windowBackground">@android:color/white</item>
+
+        <!-- 화면의 위치나 크기를 유동적으로 처리 -->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+</resources>

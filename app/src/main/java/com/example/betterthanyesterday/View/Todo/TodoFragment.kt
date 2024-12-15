@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday.Viewmodel
+package com.example.betterthanyesterday.View.Todo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.betterthanyesterday.R
-import com.example.betterthanyesterday.View.Todo.TodoAdapter
+import com.example.betterthanyesterday.Viewmodel.TodoViewModel
 import com.example.betterthanyesterday.databinding.FragmentTodoBinding
 
 class TodoFragment : Fragment() {
