@@ -7,7 +7,8 @@ import com.example.betterthanyesterday.Repository.TodoRepository
 
 data class Todo(
     val title: String = "",
-    val detail: String = ""
+    val detail: String = "",
+    val imgUri: String? = null,
 )
 
 
@@ -15,7 +16,7 @@ class TodoViewModel : ViewModel() {
     private val _todoList = MutableLiveData<MutableList<Todo>>(mutableListOf())
     val todoList: LiveData<MutableList<Todo>> get() = _todoList
 
-    // 업데이트 성공 여부를 관리할 LiveData 추가
+    // 업데이트 성공 여부 LiveData
     private val _updateSuccess = MutableLiveData<Boolean>()
     val updateSuccess: LiveData<Boolean> get() = _updateSuccess
 
@@ -43,8 +44,8 @@ class TodoViewModel : ViewModel() {
     }
 
 
-    fun deleteTodo(todo: Todo, onComplete: MutableLiveData<Boolean>) {
-        repository.deleteTodo(todo, onComplete)
+    fun deleteTodo(todo: Todo) {
+        repository.deleteTodo(todo)
     }
 
     // 삭제 성공 시 Todo를 로컬 리스트에서 제거

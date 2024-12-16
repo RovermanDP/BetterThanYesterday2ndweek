@@ -44,6 +44,7 @@ class TodoAdapter(private var todos: Array<Todo>,
             binding.imageDelete.setImageResource(R.drawable.todo_delete)
             binding.imageCheck.setImageResource(R.drawable.todo_check)
 
+            // 수정 버튼 클릭 리스너
             binding.imageEdit.setOnClickListener {
                 val todoDialogFragment = TodoDialogFragment.newInstance(todo.title, todo.detail)
                 todoDialogFragment.show(parentFragmentManager, "TodoDialog")
@@ -51,21 +52,7 @@ class TodoAdapter(private var todos: Array<Todo>,
 
             // 삭제 버튼 클릭 리스너
             binding.imageDelete.setOnClickListener {
-                val deleteSuccess = MutableLiveData<Boolean>()
-                // Todo 삭제
-                viewModel.deleteTodo(todo, deleteSuccess)
-
-                // 삭제 완료 후 처리
-                deleteSuccess.observeForever { success ->
-                    if (success) {
-                        // 삭제 성공 시 로컬 리스트에서 해당 Todo 제거
-                        viewModel.removeTodo(todo)
-                    } else {
-                        // 삭제 실패 시 사용자에게 알림
-                        Toast.makeText(binding.root.context, "Todo 삭제 실패", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
+                viewModel.deleteTodo(todo)
             }
 
             // Check 버튼 클릭 리스너

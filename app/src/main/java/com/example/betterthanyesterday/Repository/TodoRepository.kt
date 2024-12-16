@@ -62,27 +62,22 @@ class TodoRepository {
     }
 
     // Todo 삭제 함수
-    fun deleteTodo(todo: Todo, onComplete: MutableLiveData<Boolean>) {
+    fun deleteTodo(todo: Todo) {
         todoRef.orderByChild("title").equalTo(todo.title)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (todoSnapshot in snapshot.children) {
                         val existingTodo = todoSnapshot.getValue(Todo::class.java)
                         if (existingTodo != null && existingTodo.title == todo.title && existingTodo.detail == todo.detail) {
-                            todoSnapshot.ref.removeValue().addOnCompleteListener { task ->
-                                onComplete.postValue(task.isSuccessful)
-                            }
+                            todoSnapshot.ref.removeValue()
                             return
                         }
                     }
-                    onComplete.postValue(false) // Todo를 찾지 못했거나 삭제 실패
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.e("TodoRepository", "Database error: ${error.message}")
-                    onComplete.postValue(false)
                 }
             })
     }
 }
-

@@ -53,6 +53,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.1")
+    implementation ("com.google.firebase:firebase-storage:21.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
