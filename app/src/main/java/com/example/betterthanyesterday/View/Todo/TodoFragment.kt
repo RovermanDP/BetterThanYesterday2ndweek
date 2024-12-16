@@ -43,7 +43,6 @@ class TodoFragment : Fragment() {
         binding?.btnAdd?.setOnClickListener {
             findNavController().navigate(R.id.action_todoFragment_to_todoAddFragment)
         }
-
     }
 
     // View 파괴될 때 메모리 누수 방지
@@ -51,5 +50,4 @@ class TodoFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
 }

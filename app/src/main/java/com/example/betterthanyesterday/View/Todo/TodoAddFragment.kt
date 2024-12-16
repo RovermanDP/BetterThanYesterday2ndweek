@@ -42,6 +42,7 @@ class TodoAddFragment : Fragment() {
         binding.edtTitle.setText(text1)
         binding.edtDetail.setText(text2)
 
+        // 사진 선택
         val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
             binding.imageView.setImageURI(it)
             if (it != null) {
@@ -58,13 +59,12 @@ class TodoAddFragment : Fragment() {
             val newDetail = binding.edtDetail.text.toString()
 
             if (newTitle.isNotBlank()) {
+                // 사진 있을 때 Todo 추가
                 if (uri != null) {
-                    // 이미지가 선택되었으면 Firebase에 업로드
                     val imageRef = storageRef.child("todo/${System.currentTimeMillis()}.jpg")
                     imageRef.putFile(uri!!)
                         .addOnSuccessListener { taskSnapshot ->
                             imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                                // 다운로드 URL을 Todo 객체에 추가
                                 val imgUri = downloadUri.toString()
                                 val newTodo = Todo(newTitle, newDetail, imgUri)
                                 viewModel.addTodo(newTodo)
@@ -72,18 +72,16 @@ class TodoAddFragment : Fragment() {
                             }
                         }
                         .addOnFailureListener { exception ->
-                            // 업로드 실패 처리
                             exception.printStackTrace()
                         }
+                // 사진 없을 때 Todo 추가
                 } else {
-                    // 이미지 없이 Todo 추가
                     val newTodo = Todo(newTitle, newDetail, null)
                     viewModel.addTodo(newTodo)
                     findNavController().navigate(R.id.action_todoAddFragment_to_todoFragment)
                 }
             }
         }
-
         return binding.root
     }
 

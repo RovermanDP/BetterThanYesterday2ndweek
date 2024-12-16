@@ -11,7 +11,6 @@ data class Todo(
     val imgUri: String? = null,
 )
 
-
 class TodoViewModel : ViewModel() {
     private val _todoList = MutableLiveData<MutableList<Todo>>(mutableListOf())
     val todoList: LiveData<MutableList<Todo>> get() = _todoList
@@ -26,16 +25,20 @@ class TodoViewModel : ViewModel() {
         repository.observeTodo(_todoList)
     }
 
+    // Todo 추가
     fun addTodo(todo: Todo) {
         repository.postTodo(todo, _updateSuccess)
     }
 
+    // Todo 수정
     fun updateTodo(updatedTodo: Todo) {
         repository.updateTodo(updatedTodo, _updateSuccess)
+        // Todo 로컬 리스트 수정
         _updateSuccess.observeForever { success ->
             if (success) {
                 val currentList = _todoList.value ?: mutableListOf()
                 val updatedList = currentList.map { todo ->
+                    // 제목 기준으로 일치하는 항목 찾음
                     if (todo.title == updatedTodo.title) updatedTodo else todo
                 }.toMutableList()
                 _todoList.value = updatedList
@@ -43,12 +46,12 @@ class TodoViewModel : ViewModel() {
         }
     }
 
-
+    // Todo 삭제
     fun deleteTodo(todo: Todo) {
         repository.deleteTodo(todo)
     }
 
-    // 삭제 성공 시 Todo를 로컬 리스트에서 제거
+    // Todo 로컬 리스트 삭제
     fun removeTodo(todo: Todo) {
         val currentList = _todoList.value ?: mutableListOf()
         val updatedList = currentList.filter { it != todo }.toMutableList()

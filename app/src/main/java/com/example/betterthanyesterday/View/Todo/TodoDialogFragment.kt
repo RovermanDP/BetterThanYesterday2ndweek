@@ -35,20 +35,19 @@ class TodoDialogFragment : DialogFragment() {
         binding.edttxtTitle.setText(text1)
         binding.edttxtDetail.setText(text2)
 
-        val imageView = binding.imageView2 // 이미지 뷰를 연결
+        val imageView = binding.imageView2
         if (!imageUrl.isNullOrEmpty()) {
             Picasso.get()
-                .load(imageUrl) // Firebase에서 가져온 이미지 URL
-                .into(imageView) // 이미지를 ImageView에 표시
+                .load(imageUrl)
+                .into(imageView)
         }
 
         binding.btnChk.setOnClickListener {
             val edtTitle = binding.edttxtTitle.text.toString()
             val edtDetail = binding.edttxtDetail.text.toString()
 
-            // 입력된 제목과 세부 내용이 비어있지 않은지 확인
             if (edtTitle.isNotBlank() || edtDetail.isNotBlank()) {
-                // 제목 또는 세부 내용이 변경된 경우에만 업데이트 수행
+                // 제목이나 세부내용이 변경된 경우에만 Todo 수정
                 if (edtTitle != text1 || edtDetail != text2) {
                     val database = FirebaseDatabase.getInstance().reference
                     val query = database.child("todo").orderByChild("title").equalTo(text1)
@@ -75,7 +74,7 @@ class TodoDialogFragment : DialogFragment() {
                         Log.e("Firebase", "Query failed", exception)
                     }
                 } else {
-                    dismiss() // 변경된 내용이 없을 경우에도 다이얼로그 닫기
+                    dismiss() // 변경된 내용이 없어도 다이얼로그 닫기
                 }
             }
         }
