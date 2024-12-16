@@ -1,14 +1,20 @@
-package com.example.betterthanyesterday.View.Budget
+package com.example.betterthanyesterday
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.betterthanyesterday.databinding.FragmentBudgetAddBinding
-import com.example.betterthanyesterday.Viewmodel.BudgetViewModel
+import com.example.betterthanyesterday.databinding.FragmentBudgetBinding
+import com.example.betterthanyesterday.databinding.FragmentTodoBinding
+import com.example.betterthanyesterday.viewmodel.BudgetViewModel
 
 
 class BudgetAddFragment : Fragment() {
@@ -32,13 +38,17 @@ class BudgetAddFragment : Fragment() {
         val chooseMonth = arguments?.getInt("chooseMonth") ?: 0
         val chooseDay = arguments?.getInt("chooseDay") ?: 0
 
-        selectedDate = "$chooseYear-${chooseMonth.toString().padStart(2, '0')}" + "-${chooseDay.toString().padStart(2, '0')}"
+        selectedDate = "$chooseYear-${chooseMonth.toString().padStart(2, '0')}" + "-${
+            chooseDay.toString().padStart(2, '0')
+        }"
 
         binding?.nowyearTxt?.text = chooseYear.toString()
         binding?.nowmonthTxt?.text = chooseMonth.toString().padStart(2, '0')
         binding?.nowdateTxt?.text = chooseDay.toString().padStart(2, '0')
 
-        val adapter = BudgetsAdapter(emptyList())
+        val adapter = BudgetsAdapter(emptyList()) { record ->
+            viewModel.deleteBudgetRecord(selectedDate, record) // 삭제 처리
+        }
         binding?.recBudgets?.layoutManager = LinearLayoutManager(requireContext())
         binding?.recBudgets?.adapter = adapter
 
@@ -50,20 +60,34 @@ class BudgetAddFragment : Fragment() {
 
         viewModel.loadBudgetRecords(selectedDate)
 
-    binding?.expendBtn?.setOnClickListener {
-        val category = binding?.categoryText?.text.toString()
-        val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
-        val record = BudgetRecord(choice = "지출", category = category, mount = amount)
-        viewModel.addBudgetRecord(selectedDate, record)
-    }
+        binding?.expendBtn?.setOnClickListener {
+            val category = binding?.categoryText?.text.toString()
+            val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
+            val record = BudgetRecord(
+                choice = "지출",
+                category = category,
+                mount = amount,
+                year = chooseYear,
+                month = chooseMonth,
+                day = chooseDay
+            )
+            viewModel.addBudgetRecord(selectedDate, record)
+        }
 
-    binding?.importBtn?.setOnClickListener {
-        val category = binding?.categoryText?.text.toString()
-        val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
-        val record = BudgetRecord(choice = "수입", category = category, mount = amount)
-        viewModel.addBudgetRecord(selectedDate, record)
+        binding?.importBtn?.setOnClickListener {
+            val category = binding?.categoryText?.text.toString()
+            val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
+            val record = BudgetRecord(
+                choice = "수입",
+                category = category,
+                mount = amount,
+                year = chooseYear,
+                month = chooseMonth,
+                day = chooseDay
+            )
+            viewModel.addBudgetRecord(selectedDate, record)
+        }
     }
-}
 
     private fun calculateTotal(records: List<BudgetRecord>) {
         var total = 0

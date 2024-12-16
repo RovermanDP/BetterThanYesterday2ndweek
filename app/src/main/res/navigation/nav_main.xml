@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/budgetFragment"
-        android:name="com.example.betterthanyesterday.View.Budget.BudgetFragment"
+        android:name="com.example.betterthanyesterday.BudgetFragment"
         android:label="Budget"
         tools:layout="@layout/fragment_budget" >
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/budgetAddFragment"
-        android:name="com.example.betterthanyesterday.View.Budget.BudgetAddFragment"
+        android:name="com.example.betterthanyesterday.BudgetAddFragment"
         android:label="Budget"
         tools:layout="@layout/fragment_budget_add" />
     <fragment
