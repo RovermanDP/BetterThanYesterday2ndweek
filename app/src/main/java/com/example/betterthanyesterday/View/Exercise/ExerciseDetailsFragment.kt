@@ -6,20 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.betterthanyesterday.ExerciseViewModel
+import com.example.betterthanyesterday.ExerciseViewModelFactory
+import com.example.betterthanyesterday.Repository.ExerciseRepository
+import com.example.betterthanyesterday.View.Adapter.ExercisesAdapter
 import com.example.betterthanyesterday.databinding.FragmentExerciseDetailsBinding
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import org.koin.android.ext.android.get
 
 class ExerciseDetailsFragment : Fragment() {
 
-    private val viewModel: ExerciseViewModel by activityViewModels()
     private var binding: FragmentExerciseDetailsBinding? = null
     private var selectedDate: String = ""
+
+    // ViewModel 초기화
+    private val viewModel: ExerciseViewModel by viewModels {
+        ExerciseViewModelFactory(ExerciseRepository(weatherAPI = get()))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +50,7 @@ class ExerciseDetailsFragment : Fragment() {
         viewModel.exerciseRecords.observe(viewLifecycleOwner) { records ->
             adapter.updateRecords(records)
             calculateTotalCalories(records)
-            setupBarChart(records) // 차트 설정
+            setupBarChart(records)
         }
 
         viewModel.loadExerciseRecords(selectedDate)
@@ -52,12 +60,13 @@ class ExerciseDetailsFragment : Fragment() {
             val calories = binding?.caloriesText?.text.toString().toIntOrNull() ?: 0
 
             if (exerciseType.isNotBlank() && calories > 0) {
-                val record = ExerciseRecord(type = exerciseType, caloriesBurned = calories)
+                val record = ExerciseRecord(type = exerciseType, caloriesBurned = calories, date = selectedDate) // 'date' 추가
                 viewModel.addExerciseRecord(selectedDate, record)
             } else {
                 Toast.makeText(requireContext(), "운동 종류와 소모 칼로리를 입력하세요.", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private fun calculateTotalCalories(records: List<ExerciseRecord>) {
@@ -68,39 +77,29 @@ class ExerciseDetailsFragment : Fragment() {
     private fun setupBarChart(records: List<ExerciseRecord>) {
         val barChart = binding?.barChart
 
-        // 운동 종류별로 칼로리 그룹화
         val caloriesByType = records.groupBy { it.type }
             .mapValues { entry -> entry.value.sumOf { it.caloriesBurned } }
 
-        // BarEntry 생성
         val entries = caloriesByType.entries.mapIndexed { index, entry ->
-            BarEntry(index.toFloat(), entry.value.toFloat()) // index와 value를 명확히 변환
+            BarEntry(index.toFloat(), entry.value.toFloat())
         }
 
-        // BarDataSet 생성
         val dataSet = BarDataSet(entries, "운동별 칼로리 소모량")
         dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
 
-        // BarData 생성
         val barData = BarData(dataSet)
         barData.barWidth = 0.9f
 
-        // BarChart 설정
         barChart?.apply {
             data = barData
             description.text = "운동 종류별 칼로리 비교"
             setFitBars(true)
-            invalidate() // 차트 새로고침
+            invalidate()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
 }
-
-
-
-

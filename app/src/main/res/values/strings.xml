@@ -2,4 +2,8 @@
     <string name="app_name">Better Than Yesterday</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_location">Search Location</string>
+    <string name="풍속">풍속</string>
+    <string name="습도">습도</string>
+    <string name="강수확률">강수확률</string>
 </resources>

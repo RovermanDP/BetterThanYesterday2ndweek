@@ -1,4 +1,4 @@
-package com.example.betterthanyesterday.View.Exercise
+package com.example.betterthanyesterday.View.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.betterthanyesterday.R
+import com.example.betterthanyesterday.View.Exercise.ExerciseRecord
 
 
 class ExercisesAdapter(private var records: List<ExerciseRecord>) :
@@ -31,7 +32,7 @@ class ExercisesAdapter(private var records: List<ExerciseRecord>) :
     override fun getItemCount() = records.size
 
     fun updateRecords(newRecords: List<ExerciseRecord>) {
-        records = newRecords
+        this.records = newRecords
         notifyDataSetChanged()
     }
 }
