@@ -11,6 +11,7 @@ class BudgetRepository {
     private val database = FirebaseDatabase.getInstance()
     private val userRef = database.getReference("budget")
 
+    //가계 추가
     suspend fun addBudgetRecord(date: String, bdrecord: BudgetRecord): Boolean {
         return try {
             val year = bdrecord.year.toString()
@@ -30,6 +31,7 @@ class BudgetRepository {
         }
     }
 
+    //가계 제거
     suspend fun deleteBudgetRecord(date: String, record: BudgetRecord): Boolean {
         return try {
             val year = record.year.toString()
@@ -59,6 +61,7 @@ class BudgetRepository {
         }
     }
 
+    //가계 로드
     suspend fun getBudgetRecords(date: String): List<BudgetRecord> {
         return try {
             val dateParts = date.split("-")
@@ -91,6 +94,7 @@ class BudgetRepository {
         }
     }
 
+    //지출 충합 구하기
     suspend fun getExpenseSum(year: Int, month: Int): Int {
         return try {
             val yearString = year.toString()

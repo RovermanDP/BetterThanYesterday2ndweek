@@ -32,7 +32,7 @@ class BudgetsAdapter(
     }
 
     override fun onBindViewHolder(holder: BudgetViewHolder, position: Int) {
-        val record = budgets[position]
+        val record = budgets[position]  //position: 현재 항목 인덱스
         holder.binding.choiceTxt.text = record.choice
         holder.binding.contentTxt.text = record.category
         holder.binding.mountTxt.text = record.mount.toString()
@@ -43,8 +43,10 @@ class BudgetsAdapter(
         }
     }
 
+    //리사이클러뷰에 표시할 항목 수
     override fun getItemCount() = budgets.size
 
+    //가계부 갱신
     fun updateRecords(newRecords: List<BudgetRecord>) {
         budgets = newRecords
         notifyDataSetChanged()

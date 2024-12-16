@@ -27,11 +27,6 @@ class BudgetFragment : Fragment() {
 
     var binding: FragmentBudgetBinding? = null
     private val budgetViewModel: BudgetViewModel by viewModels()
-    private lateinit var adapter: BudgetsAdapter  // 어댑터 추가
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +45,13 @@ class BudgetFragment : Fragment() {
         val currentMonth = currentDate.get(java.util.Calendar.MONTH) + 1
 
         // CalendarView 클릭 시 날짜 선택하여 다른 프래그먼트로 이동
-        binding?.calendar?.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        binding?.calendar?.setOnDateChangeListener { _, year, month, dayOfMonth ->  //람다함수
             val chooseYear = year
             val chooseMonth = month + 1
             val chooseDay = dayOfMonth
 
             val bundle = Bundle().apply {
+                //putInt(Bundle에 데이터 저장하는 메서드)로 날짜 bundle에 저장
                 putInt("chooseYear", chooseYear)
                 putInt("chooseMonth", chooseMonth)
                 putInt("chooseDay", chooseDay)
@@ -65,10 +61,10 @@ class BudgetFragment : Fragment() {
         }
 
 
-        //월별 지출 합계 로드
+        //월별 지출 합계 로드 -> 월 지출 총액에 이용
         budgetViewModel.loadMonthlyExpenseSum(currentYear, currentMonth)
 
-        // 연 지출 합계 로드
+        // 연 지출 합계 로드 -> 그래프에 이용
         budgetViewModel.loadYearlyExpenseSum(currentYear)
 
         // 월별 지출 합계 관찰
@@ -103,9 +99,9 @@ class BudgetFragment : Fragment() {
 
     private fun showGoalInputDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("목표 지출 설정")
+        builder.setTitle("목표 지출 설정")    //다이얼로그 title설정
 
-        // EditText를 다이얼로그에 추가
+        // 입력창 추가
         val input = EditText(requireContext()).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
         }
@@ -132,6 +128,7 @@ class BudgetFragment : Fragment() {
         builder.show()
     }
 
+    //linechart 설정
     private fun setupLineChart(monthlySums: List<Int>) {
         // X축의 레이블 설정 (1월부터 12월)
         val months = (1..12).map { "${it}월" }
@@ -142,7 +139,7 @@ class BudgetFragment : Fragment() {
         }
 
         val dataSet = LineDataSet(entries, "월별 지출") // 데이터셋에 레이블 설정
-        dataSet.color = resources.getColor(R.color.black, null) // 선 색 설정
+        dataSet.color = resources.getColor(R.color.action_bar_color, null) // 선 색 설정
         dataSet.valueTextColor = resources.getColor(R.color.black, null) // 값 색 설정
         dataSet.valueTextSize = 10f
 
@@ -153,14 +150,14 @@ class BudgetFragment : Fragment() {
         // X축 설정 (1~12월)
         binding?.chart?.xAxis?.apply {
             valueFormatter = IndexAxisValueFormatter(months) // 월 레이블 설정
-            position = XAxis.XAxisPosition.BOTTOM
+            position = XAxis.XAxisPosition.BOTTOM //x축 레이블 위치
             setDrawGridLines(false) // 그리드 선 없애기
         }
 
         // Y축 설정
         binding?.chart?.axisLeft?.apply {
             setDrawGridLines(true) // 그리드 선 보이기
-            setDrawAxisLine(true) // 축선 보이기
+            setDrawAxisLine(true) // Y축선 보이기
         }
 
         binding?.chart?.axisRight?.isEnabled = false // 오른쪽 Y축 비활성화

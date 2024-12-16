@@ -1,5 +1,6 @@
 package com.example.betterthanyesterday
 
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
         setContentView(binding.root)
+
+        supportActionBar?.setBackgroundDrawable(
+            ColorDrawable(resources.getColor(R.color.action_bar_color, null))
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {

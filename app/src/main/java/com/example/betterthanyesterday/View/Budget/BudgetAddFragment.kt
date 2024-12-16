@@ -34,6 +34,7 @@ class BudgetAddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //달력 선택 날짜 전달받기
         val chooseYear = arguments?.getInt("chooseYear") ?: 0
         val chooseMonth = arguments?.getInt("chooseMonth") ?: 0
         val chooseDay = arguments?.getInt("chooseDay") ?: 0
@@ -42,10 +43,12 @@ class BudgetAddFragment : Fragment() {
             chooseDay.toString().padStart(2, '0')
         }"
 
+        //달력 선택 날짜 출력
         binding?.nowyearTxt?.text = chooseYear.toString()
         binding?.nowmonthTxt?.text = chooseMonth.toString().padStart(2, '0')
         binding?.nowdateTxt?.text = chooseDay.toString().padStart(2, '0')
 
+        //어댑터 연결
         val adapter = BudgetsAdapter(emptyList()) { record ->
             viewModel.deleteBudgetRecord(selectedDate, record) // 삭제 처리
         }
@@ -60,6 +63,7 @@ class BudgetAddFragment : Fragment() {
 
         viewModel.loadBudgetRecords(selectedDate)
 
+        //지출 버튼 클릭
         binding?.expendBtn?.setOnClickListener {
             val category = binding?.categoryText?.text.toString()
             val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
@@ -74,6 +78,7 @@ class BudgetAddFragment : Fragment() {
             viewModel.addBudgetRecord(selectedDate, record)
         }
 
+        //수입 버튼 클릭
         binding?.importBtn?.setOnClickListener {
             val category = binding?.categoryText?.text.toString()
             val amount = binding?.moneyText?.text.toString().toIntOrNull() ?: 0
@@ -89,6 +94,7 @@ class BudgetAddFragment : Fragment() {
         }
     }
 
+    //해당 일자 +-총액 계산
     private fun calculateTotal(records: List<BudgetRecord>) {
         var total = 0
 
