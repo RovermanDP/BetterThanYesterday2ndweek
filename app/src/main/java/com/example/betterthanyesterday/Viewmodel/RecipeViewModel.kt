@@ -1,5 +1,7 @@
 package com.example.betterthanyesterday.Viewmodel
 
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +13,10 @@ data class Recipe(
     val time: String? = null,
     val calories: Int = 0,
     val ingredients: String = "",
-    val description: String? = null
+    val description: String? = null,
+    val imageUrl: String = ""
 )
+
 class RecipeViewModel : ViewModel() {
 
     private val recipeRepository = RecipeRepository()
@@ -34,26 +38,37 @@ class RecipeViewModel : ViewModel() {
         recipeRepository.deleteRecipeFromDatabase(recipe)
 
     }
-    /*
-    fun addRecipeRecord(record: Recipe) {
-        viewModelScope.launch {
-            recipeRepository.addRecipeRecords(record)
-            loadRecipeRecords()
-        }
+
+    fun updateRecipe(recipe: Recipe) {
+        recipeRepository.updateRecipeInDatabase(recipe)
     }
 
-    fun addRecipe(recipe: Recipe) {
-        recipeRepository.postRecipe(recipe)
+    fun addRecipeWithImage(recipe: Recipe, imageUri: Uri) {
+        recipeRepository.uploadImageToFirebase(imageUri,
+            onSuccess = { imageUrl ->
+                val updatedRecipe = recipe.copy(imageUrl = imageUrl)
+
+                addRecipe(updatedRecipe)
+
+                _recipes.value = _recipes.value?.map {
+                    if (it.title == recipe.title) updatedRecipe else it
+                }?.toMutableList()
+            },
+            onFailure = { e ->
+                Log.e("RecipeViewModel", "Image upload failed: ${e.message}")
+            })
     }
-    fun deleteRecipe(recipe: Recipe) {
-        _recipes.value?.remove(recipe)_recipes.value = _recipes.value
+    fun uploadImageAndSaveRecipe(recipe: Recipe, imageUri: Uri) {
+        recipeRepository.uploadImageToFirebase(
+            imageUri,
+            onSuccess = { imageUrl ->
+                val updatedRecipe = recipe.copy(imageUrl = imageUrl)
+                updateRecipe(updatedRecipe)
+            },
+            onFailure = { e ->
+                Log.e("RecipeViewModel", "Image upload failed: ${e.message}")
+            }
+        )
     }
 
-    fun loadRecipeRecords() {
-        viewModelScope.launch {
-            _recipes.value = recipeRepository.getRecipeRecords()
-        }
-    }
-
-    */
 }

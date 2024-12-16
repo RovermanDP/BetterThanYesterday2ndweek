@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="48dp"
-        android:backgroundTint="#00A86B"
+        android:backgroundTint="#B1B2FF"
         android:text="Add Recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

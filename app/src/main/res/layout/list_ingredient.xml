@@ -8,18 +8,18 @@
     <EditText
         android:id="@+id/edt_ingredient_name"
         android:layout_width="161dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_weight="1"
         android:hint="Ingredient"
         android:inputType="text"
-        android:padding="12dp" />
+        android:padding="8dp" />
 
     <EditText
         android:id="@+id/edt_ingredient_qty"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_weight="1"
         android:hint="Qty"
-        android:padding="12dp"
-        android:inputType="text" />
+        android:inputType="text"
+        android:padding="8dp" />
 </LinearLayout>

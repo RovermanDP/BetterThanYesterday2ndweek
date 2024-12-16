@@ -1,5 +1,6 @@
 package com.example.betterthanyesterday.Repository
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.betterthanyesterday.Viewmodel.Recipe
@@ -9,6 +10,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class RecipeRepository {
@@ -17,6 +19,7 @@ class RecipeRepository {
     val recipeRef = database.getReference("RecipeList")
     private val firestore = FirebaseFirestore.getInstance()
 
+    // Recipe observing in real-time
     fun observeRecipe(recipe: MutableLiveData<MutableList<Recipe>>) {
         recipeRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -34,6 +37,7 @@ class RecipeRepository {
         })
     }
 
+    // recipe upload (sorting : recipe 1 ~ recipe (num))
     fun postRecipe(recipe: Recipe) {
         recipeRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -45,13 +49,13 @@ class RecipeRepository {
                 }
                 recipeRef.child(newKey).setValue(recipe)
             }
-
             override fun onCancelled(error: DatabaseError) {
                 Log.e("RecipeRepository", "Failed to fetch last key: ${error.message}")
             }
         })
     }
 
+    //recipe delete - title : id
     fun deleteRecipeFromDatabase(recipe: Recipe) {
         recipeRef.orderByChild("title").equalTo(recipe.title)
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -66,14 +70,33 @@ class RecipeRepository {
                 }
             })
     }
+    // update recipe : title can't update
+    fun updateRecipeInDatabase(updatedRecipe: Recipe) {
+        recipeRef.orderByChild("title").equalTo(updatedRecipe.title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (child in snapshot.children) {
+                        child.ref.setValue(updatedRecipe)
+                    }
+                }
 
-    suspend fun addRecipeRecords(record: Recipe) {
-        firestore.collection("recipeRecords").add(record).await()
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("RecipeRepository", "Failed to update recipe: ${error.message}")
+                }
+            })
     }
 
-    suspend fun getRecipeRecords(): List<Recipe> {
-        val snapshot = firestore.collection("recipeRecords").get().await()
-        return snapshot.documents.mapNotNull { it.toObject(Recipe::class.java) }
+    fun uploadImageToFirebase(uri: Uri, onSuccess: (String) -> Unit, onFailure: (Exception) -> Unit) {
+        val storageRef = FirebaseStorage.getInstance().reference.child("recipe_images/${System.currentTimeMillis()}.jpg")
+        storageRef.putFile(uri)
+            .addOnSuccessListener { taskSnapshot ->
+                storageRef.downloadUrl.addOnSuccessListener { url ->
+                    onSuccess(url.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailure(e)
+            }
     }
 }
 

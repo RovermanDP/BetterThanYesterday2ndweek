@@ -69,8 +69,6 @@
         <action
             android:id="@+id/action_todoAddFragment_to_todoFragment"
             app:destination="@id/todoFragment" />
-
-
     </fragment>
     <fragment
         android:id="@+id/budgetAddFragment"
@@ -86,4 +84,9 @@
         android:id="@+id/action_todoDialogFragment_to_todoFragment"
         app:destination="@id/todoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/recipeEditFragment"
+        android:name="com.example.betterthanyesterday.View.Recipe.RecipeEditFragment"
+        android:label="Edit Recipe"
+        tools:layout="@layout/dialog_edit_recipe" />
 </navigation>
