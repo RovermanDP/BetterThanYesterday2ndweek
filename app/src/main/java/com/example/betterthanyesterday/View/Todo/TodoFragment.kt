@@ -18,7 +18,7 @@ class TodoFragment : Fragment() {
 
     var binding: FragmentTodoBinding? = null
 
-    // 뷰를 만들 때 실행할 내용
+    // View 만들 때 실행할 내용
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +27,7 @@ class TodoFragment : Fragment() {
         return binding?.root
     }
 
-    // 뷰가 만들어지면 실행할 내용
+    // View 만들어지면 실행할 내용
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,7 +35,7 @@ class TodoFragment : Fragment() {
         binding?.recTodos?.adapter = adapter
         binding?.recTodos?.layoutManager = LinearLayoutManager(requireContext())
 
-        // 뷰모델의 LiveData 구독
+        // Viewmodel LiveData 구독
         viewModel.todoList.observe(viewLifecycleOwner) { todos ->
             adapter.updateData(todos.toTypedArray())
         }
@@ -46,7 +46,7 @@ class TodoFragment : Fragment() {
 
     }
 
-    // 뷰 파괴될 때 메모리 누수 방지
+    // View 파괴될 때 메모리 누수 방지
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

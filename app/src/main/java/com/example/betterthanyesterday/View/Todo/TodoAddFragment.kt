@@ -34,7 +34,7 @@ class TodoAddFragment : Fragment() {
     ): View? {
         val binding = FragmentTodoAddBinding.inflate(inflater, container, false)
 
-        storageRef = FirebaseStorage.getInstance().getReference("Images")
+        storageRef = FirebaseStorage.getInstance().getReference("image")
 
         val text1 = arguments?.getString("text1")
         val text2 = arguments?.getString("text2")
@@ -60,7 +60,7 @@ class TodoAddFragment : Fragment() {
             if (newTitle.isNotBlank()) {
                 if (uri != null) {
                     // 이미지가 선택되었으면 Firebase에 업로드
-                    val imageRef = storageRef.child("todo_images/${System.currentTimeMillis()}.jpg")
+                    val imageRef = storageRef.child("todo/${System.currentTimeMillis()}.jpg")
                     imageRef.putFile(uri!!)
                         .addOnSuccessListener { taskSnapshot ->
                             imageRef.downloadUrl.addOnSuccessListener { downloadUri ->

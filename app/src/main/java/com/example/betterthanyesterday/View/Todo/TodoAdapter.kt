@@ -46,7 +46,7 @@ class TodoAdapter(private var todos: Array<Todo>,
 
             // 수정 버튼 클릭 리스너
             binding.imageEdit.setOnClickListener {
-                val todoDialogFragment = TodoDialogFragment.newInstance(todo.title, todo.detail)
+                val todoDialogFragment = TodoDialogFragment.newInstance(todo.title, todo.detail, todo.imgUri)
                 todoDialogFragment.show(parentFragmentManager, "TodoDialog")
             }
 

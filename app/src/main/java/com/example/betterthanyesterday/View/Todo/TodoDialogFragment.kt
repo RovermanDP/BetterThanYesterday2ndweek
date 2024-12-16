@@ -11,6 +11,7 @@ import com.example.betterthanyesterday.R
 import com.example.betterthanyesterday.databinding.FragmentTodoDialogBinding
 import com.example.betterthanyesterday.Viewmodel.TodoViewModel
 import com.google.firebase.database.FirebaseDatabase
+import com.squareup.picasso.Picasso
 
 class TodoDialogFragment : DialogFragment() {
 
@@ -29,9 +30,17 @@ class TodoDialogFragment : DialogFragment() {
 
         val text1 = arguments?.getString("text1")
         val text2 = arguments?.getString("text2")
+        val imageUrl = arguments?.getString("imgUri")
 
         binding.edttxtTitle.setText(text1)
         binding.edttxtDetail.setText(text2)
+
+        val imageView = binding.imageView2 // 이미지 뷰를 연결
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get()
+                .load(imageUrl) // Firebase에서 가져온 이미지 URL
+                .into(imageView) // 이미지를 ImageView에 표시
+        }
 
         binding.btnChk.setOnClickListener {
             val edtTitle = binding.edttxtTitle.text.toString()
@@ -86,11 +95,12 @@ class TodoDialogFragment : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(str1: String? = null, str2: String? = null): TodoDialogFragment {
+        fun newInstance(str1: String? = null, str2: String? = null, imgUri: String? = null): TodoDialogFragment {
             val frag = TodoDialogFragment()
             val args = Bundle().apply {
                 putString("text1", str1)
                 putString("text2", str2)
+                putString("imgUri", imgUri)
             }
             frag.arguments = args
             return frag
