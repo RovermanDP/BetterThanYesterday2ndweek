@@ -11,7 +11,6 @@ import com.example.betterthanyesterday.View.Exercise.ExerciseRecord
 import com.example.betterthanyesterday.data.CurrentLocation
 import com.example.betterthanyesterday.data.CurrentWeather
 import com.example.betterthanyesterday.data.LiveDataEvent
-import com.example.betterthanyesterday.data.WeatherData
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.launch
 
@@ -59,7 +58,7 @@ class ExerciseViewModel(private val repository: ExerciseRepository) : ViewModel(
             repository.getCurrentLocation(
                 fusedLocationProviderClient = fusedLocationProviderClient,
                 onSuccess = { location ->
-                    updateAddressText(location, geocoder)
+                    handleAddressUpdate(location, geocoder) // 함수 이름 변경
                 },
                 onFailure = {
                     emitCurrentLocationUiState(error = "Failed to get current location")
@@ -68,10 +67,30 @@ class ExerciseViewModel(private val repository: ExerciseRepository) : ViewModel(
         }
     }
 
-    private fun updateAddressText(currentLocation: CurrentLocation, geocoder: Geocoder) {
+    @Suppress("DEPRECATION")
+    fun convertAddressToText(
+        currentLocation: CurrentLocation,
+        geocoder: Geocoder
+    ): CurrentLocation {
+        val latitude = currentLocation.latitude ?: return currentLocation
+        val longitude = currentLocation.longitude ?: return currentLocation
+        return geocoder.getFromLocation(latitude, longitude, 1)?.let { addresses ->
+            val address = addresses[0]
+            val addressText = StringBuilder()
+            addressText.append(address.locality).append(", ")
+            addressText.append(address.adminArea).append(", ")
+            addressText.append(address.countryName)
+            currentLocation.copy(location = addressText.toString())
+        } ?: currentLocation
+    }
+
+    private fun handleAddressUpdate(
+        currentLocation: CurrentLocation,
+        geocoder: Geocoder
+    ) {
         viewModelScope.launch {
             runCatching {
-                repository.updateAddressText(currentLocation, geocoder) // Repository의 함수 호출
+                convertAddressToText(currentLocation, geocoder) // 이름 변경 후 호출
             }.onSuccess { updatedLocation ->
                 emitCurrentLocationUiState(currentLocation = updatedLocation)
             }.onFailure {
@@ -82,7 +101,6 @@ class ExerciseViewModel(private val repository: ExerciseRepository) : ViewModel(
             }
         }
     }
-
 
     private fun emitCurrentLocationUiState(
         isLoading: Boolean = false,
@@ -134,5 +152,6 @@ class ExerciseViewModel(private val repository: ExerciseRepository) : ViewModel(
         val error: String?
     )
 }
+
 
 

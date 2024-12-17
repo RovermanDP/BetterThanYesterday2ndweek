@@ -1,10 +1,12 @@
 package com.example.betterthanyesterday.Viewmodel
 
+import android.location.Geocoder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.betterthanyesterday.Repository.ExerciseRepository
+import com.example.betterthanyesterday.data.CurrentLocation
 import com.example.betterthanyesterday.data.RemoteLocation
 import kotlinx.coroutines.launch
 
@@ -35,6 +37,7 @@ class LocationViewModel (private val exerciseRepository: ExerciseRepository) : V
         _searchResult.value = searchResultDataState
 
     }
+
 
     data class SearchResultDataState(
         val isLoading: Boolean ,

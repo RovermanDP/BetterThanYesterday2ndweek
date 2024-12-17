@@ -66,23 +66,6 @@ class ExerciseRepository (private val weatherAPI: WeatherAPI){
         }
     }
 
-    @Suppress("DEPRECATION")
-    fun updateAddressText(
-        currentLocation: CurrentLocation,
-        geocoder: Geocoder,
-    ): CurrentLocation {
-        val latitude = currentLocation.latitude ?: return currentLocation
-        val longitude = currentLocation.longitude ?: return currentLocation
-        return geocoder.getFromLocation(latitude, longitude, 1)?.let { addresses ->
-            val address = addresses[0]
-            val addressText = StringBuilder()
-            addressText.append(address.locality).append(", ")
-            addressText.append(address.adminArea).append(", ")
-            addressText.append(address.countryName)
-            currentLocation.copy(location = addressText.toString()
-            )
-        } ?: currentLocation
-    }
 
     suspend fun searchLocation(query: String): List<RemoteLocation>? {
         val response = weatherAPI.searchLocation(query = query)
